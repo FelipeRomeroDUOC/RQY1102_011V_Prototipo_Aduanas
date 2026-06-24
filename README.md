@@ -15,37 +15,55 @@ El proyecto se divide en dos componentes principales:
 
 ## Instrucciones de Ejecución
 
-### 1. Levantar el Backend (FastAPI)
+Existen dos maneras de levantar el proyecto: mediante Docker (recomendado para evitar problemas de dependencias) o de forma manual (local).
 
-Abre una terminal, navega a la carpeta del backend y configura el entorno:
+### Opción A: Usando Docker (Recomendado)
 
-```bash
+Requiere tener **Docker Desktop** instalado y ejecutándose.
+
+1. Abre una terminal en la raíz del proyecto.
+2. Ejecuta el siguiente comando para construir y levantar ambos contenedores simultáneamente:
+   ```bash
+   docker-compose up --build
+   ```
+3. El frontend estará disponible en `http://localhost:5173` y la API en `http://localhost:8000`.
+4. *(Nota: Cualquier cambio en el código se reflejará en vivo gracias a la configuración de volúmenes).*
+
+### Opción B: Instalación Manual (Local)
+
+Si prefieres no usar Docker, puedes levantar los servidores de forma independiente.
+
+#### 1. Levantar el Backend (FastAPI)
+
+Abre una terminal, navega a la carpeta del backend y configura el entorno.
+
+**En Windows (CMD o PowerShell):**
+```powershell
 cd aduanas-mvp/backend
-
-# Crear y activar entorno virtual (opcional pero recomendado)
 python -m venv venv
-# En Windows: venv\Scripts\activate
-# En Linux/Mac: source venv/bin/activate
-
-# Instalar dependencias
-pip install fastapi uvicorn passlib bcrypt pyjwt pydantic
-
-# Iniciar el servidor (la base de datos y usuarios semilla se crearán automáticamente)
+.\venv\Scripts\activate
+pip install -r requirements.txt
 uvicorn main:app --reload
 ```
-El backend se ejecutará en `http://localhost:8000`. Puedes ver la documentación interactiva de la API en `http://localhost:8000/docs`.
 
-### 2. Levantar el Frontend (React)
+**En Linux / macOS:**
+```bash
+cd aduanas-mvp/backend
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+uvicorn main:app --reload
+```
 
-Abre otra terminal y navega a la carpeta del frontend:
+El backend se ejecutará en `http://localhost:8000`. Documentación de la API en `http://localhost:8000/docs`.
+
+#### 2. Levantar el Frontend (React)
+
+Abre una segunda terminal y navega a la carpeta del frontend:
 
 ```bash
 cd aduanas-mvp/frontend
-
-# Instalar dependencias
 npm install
-
-# Iniciar el servidor de desarrollo
 npm run dev
 ```
 El frontend se ejecutará en `http://localhost:5173`.
