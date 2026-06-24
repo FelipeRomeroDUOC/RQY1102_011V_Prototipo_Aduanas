@@ -1,0 +1,148 @@
+import { useState, useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
+
+export default function RegistrarSalidaTemporal() {
+  const [patente, setPatente] = useState('');
+  const [rutConductor, setRutConductor] = useState('');
+  const [fechaRetorno, setFechaRetorno] = useState('');
+  const [estadoDocumentos, setEstadoDocumentos] = useState('VALIDO');
+  const [observaciones, setObservaciones] = useState('');
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const { token } = useContext(AuthContext);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    setSuccess('');
+    setIsLoading(true);
+
+    try {
+      const response = await fetch('http://localhost:8000/api/v1/vehiculos/salidas-temporales', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          patente: patente.toUpperCase(),
+          rut_pasaporte_conductor: rutConductor,
+          fecha_retorno_estimada: fechaRetorno,
+          estado_documentos: estadoDocumentos,
+          observaciones
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.detail || 'Error al registrar salida temporal');
+      }
+
+      setSuccess(`Salida temporal registrada. Retorno estimado: ${data.fecha_retorno_estimada}`);
+      setPatente('');
+      setRutConductor('');
+      setFechaRetorno('');
+      setObservaciones('');
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div className="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-sm border-t-4 border-aduana-blue">
+      <h2 className="text-xl font-bold text-aduana-blue mb-6">Salida y Admisión Temporal de Vehículos Acuerdo Chileno Argentino</h2>
+      
+      {error && (
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 text-sm">
+          {error}
+        </div>
+      )}
+      
+      {success && (
+        <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4 text-sm">
+          {success}
+        </div>
+      )}
+
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Patente del Vehículo</label>
+            <input
+              type="text"
+              required
+              className="w-full border border-gray-300 rounded px-3 py-2 focus:ring-aduana-blue focus:border-aduana-blue uppercase"
+              value={patente}
+              onChange={(e) => setPatente(e.target.value)}
+              disabled={isLoading}
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">RUT/Pasaporte Conductor</label>
+            <input
+              type="text"
+              required
+              className="w-full border border-gray-300 rounded px-3 py-2 focus:ring-aduana-blue focus:border-aduana-blue"
+              value={rutConductor}
+              onChange={(e) => setRutConductor(e.target.value)}
+              disabled={isLoading}
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Fecha Retorno Estimada</label>
+            <input
+              type="date"
+              required
+              className="w-full border border-gray-300 rounded px-3 py-2 focus:ring-aduana-blue focus:border-aduana-blue"
+              value={fechaRetorno}
+              onChange={(e) => setFechaRetorno(e.target.value)}
+              disabled={isLoading}
+            />
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Estado de Documentos</label>
+            <select
+              className="w-full border border-gray-300 rounded px-3 py-2 focus:ring-aduana-blue focus:border-aduana-blue"
+              value={estadoDocumentos}
+              onChange={(e) => setEstadoDocumentos(e.target.value)}
+              disabled={isLoading}
+            >
+              <option value="VALIDO">Válido</option>
+              <option value="OBSERVADO">Observado</option>
+              <option value="RECHAZADO">Rechazado</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Observaciones</label>
+          <textarea
+            className="w-full border border-gray-300 rounded px-3 py-2 focus:ring-aduana-blue focus:border-aduana-blue"
+            rows="2"
+            value={observaciones}
+            onChange={(e) => setObservaciones(e.target.value)}
+            disabled={isLoading}
+          ></textarea>
+        </div>
+
+        <div className="pt-4">
+          <button
+            type="submit"
+            disabled={isLoading}
+            className={`w-full bg-aduana-blue text-white font-semibold py-2 rounded transition-colors ${isLoading ? 'opacity-70 cursor-not-allowed' : 'hover:bg-aduana-light'}`}
+          >
+            {isLoading ? 'Registrando...' : 'Registrar Salida Temporal'}
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+}
