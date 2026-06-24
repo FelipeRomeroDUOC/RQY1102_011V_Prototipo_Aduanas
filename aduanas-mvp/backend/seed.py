@@ -33,6 +33,26 @@ def seed_db():
     else:
         print("La base de datos ya contiene usuarios.")
 
+    # Viajero de prueba
+    cursor.execute("SELECT COUNT(*) FROM viajeros WHERE rut_pasaporte = '12345678-9'")
+    if cursor.fetchone()[0] == 0:
+        cursor.execute("""
+            INSERT INTO viajeros (rut_pasaporte, nombre, apellido, nacionalidad, fecha_nacimiento, tipo_documento)
+            VALUES ('12345678-9', 'María', 'González', 'Chilena', '1990-05-15', 'RUT')
+        """)
+        conn.commit()
+        print("Viajero de prueba creado.")
+
+    # Vehículo de prueba
+    cursor.execute("SELECT COUNT(*) FROM vehiculos WHERE patente = 'ABCD12'")
+    if cursor.fetchone()[0] == 0:
+        cursor.execute("""
+            INSERT INTO vehiculos (patente, tipo, marca, modelo, anio, tipo_placa)
+            VALUES ('ABCD12', 'CAMIONETA', 'Toyota', 'Hilux', 2022, 'PARTICULAR')
+        """)
+        conn.commit()
+        print("Vehículo de prueba creado.")
+
     conn.close()
 
 if __name__ == "__main__":
