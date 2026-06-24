@@ -2,6 +2,14 @@
 
 Este proyecto utiliza Versionado Semántico (SemVer) adaptado para prototipo bajo el formato `0.MINOR.PATCH-proto.YYYYMMDD`.
 
+## [0.3.0-proto.20260624] - 2026-06-24
+
+### Añadido
+- **Dockerización**: Se crearon archivos `Dockerfile` para el frontend y backend, y un orquestador `docker-compose.yml` para facilitar el levantamiento del entorno de desarrollo (hot-reload) sin depender del sistema operativo anfitrión.
+- **Documentación QA**: El Plan de Pruebas fue reestructurado para incluir pasos de validación tanto por API como por Interfaz de Usuario (UI). Además, se incorporó un historial detallado de los fallos encontrados y solucionados durante las pruebas.
+
+---
+
 ## [0.2.0-proto.20260624] - 2026-06-24
 
 ### Añadido
