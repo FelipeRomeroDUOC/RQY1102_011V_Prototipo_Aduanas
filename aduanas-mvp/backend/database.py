@@ -25,6 +25,8 @@ def init_db():
         password_hash TEXT  NOT NULL,
         rol         TEXT    NOT NULL CHECK(rol IN ('FUNCIONARIO_PDI', 'FUNCIONARIO_SAG', 'FUNCIONARIO_ADUANAS', 'ADMINISTRADOR')),
         activo      INTEGER NOT NULL DEFAULT 1,
+        intentos_fallidos INTEGER NOT NULL DEFAULT 0,
+        bloqueado_hasta TEXT,
         creado_en   TEXT    NOT NULL DEFAULT (datetime('now'))
     );
     ''')

@@ -29,7 +29,8 @@ export default function Login() {
       });
 
       if (!response.ok) {
-        throw new Error('Credenciales inválidas');
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.detail || 'Credenciales inválidas');
       }
 
       const data = await response.json();

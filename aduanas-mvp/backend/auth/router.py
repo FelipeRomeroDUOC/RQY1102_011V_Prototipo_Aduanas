@@ -7,10 +7,10 @@ router = APIRouter(prefix="/auth", tags=["auth"])
 @router.post("/login", response_model=LoginResponse)
 def login(request: LoginRequest):
     user = authenticate_user(request.rut, request.password)
-    if not user:
+    if "error" in user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Credenciales inválidas"
+            detail=user["error"]
         )
     
     token_data = {
