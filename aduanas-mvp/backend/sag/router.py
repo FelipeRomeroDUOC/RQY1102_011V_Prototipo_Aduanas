@@ -16,3 +16,8 @@ def cambiar_resultado(id: int, resultado: ResultadoUpdate, current_user: dict = 
 @router.get("/productos-permitidos")
 def listar_productos_permitidos(current_user: dict = Depends(require_roles(["FUNCIONARIO_SAG"]))):
     return get_productos_permitidos()
+
+@router.get("/declaraciones/{id}", response_model=DeclaracionResponse)
+def obtener_declaracion(id: int, current_user: dict = Depends(require_roles(["FUNCIONARIO_SAG"]))):
+    from sag.service import get_declaracion_by_id
+    return get_declaracion_by_id(id)

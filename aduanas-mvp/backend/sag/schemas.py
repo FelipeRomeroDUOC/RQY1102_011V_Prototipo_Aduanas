@@ -15,6 +15,7 @@ class DeclaracionResponse(BaseModel):
     incluye_mascotas: bool
     resultado: str
     fecha: str
+    observaciones: Optional[str] = None
 
 class ResultadoUpdate(BaseModel):
     resultado: str # APROBADO, RETENIDO, DECOMISADO, PENDIENTE

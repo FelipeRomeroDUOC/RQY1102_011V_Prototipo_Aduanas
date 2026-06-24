@@ -2,6 +2,11 @@
 
 Este proyecto utiliza Versionado Semántico (SemVer) adaptado para prototipo bajo el formato `0.MINOR.PATCH-proto.YYYYMMDD`.
 
+## [0.2.0-proto.20260624] - 2026-06-24
+
+### Añadido
+- **SAG Fitosanitario**: Se añadió la funcionalidad completa para buscar y actualizar el estado de una Declaración Jurada (CP_SAG_2). Esto incluye un nuevo endpoint `GET /api/v1/sag/declaraciones/{id}` en el backend y la vista `ActualizarDeclaracion.jsx` en el frontend.
+
 ## [0.1.2-proto.20250623] - 2025-06-23
 
 ### Corregido

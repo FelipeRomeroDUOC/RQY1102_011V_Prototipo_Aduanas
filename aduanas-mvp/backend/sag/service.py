@@ -84,3 +84,30 @@ def get_productos_permitidos():
             { "categoria": "Plantas y semillas", "ejemplos": ["esquejes", "semillas sin certificado"] }
         ]
     }
+
+def get_declaracion_by_id(dec_id: int):
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+    
+    cursor.execute("""
+        SELECT d.*, v.nombre, v.apellido, v.rut_pasaporte 
+        FROM declaraciones_sag d
+        JOIN viajeros v ON d.viajero_id = v.id
+        WHERE d.id = ?
+    """, (dec_id,))
+    dec = cursor.fetchone()
+    conn.close()
+    
+    if not dec:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Declaración no encontrada")
+        
+    return {
+        "id": dec["id"],
+        "viajero": dec["rut_pasaporte"],
+        "productos_declarados": json.loads(dec["productos_declarados"]),
+        "incluye_mascotas": bool(dec["incluye_mascotas"]),
+        "resultado": dec["resultado"],
+        "fecha": dec["fecha"],
+        "observaciones": dec["observaciones"]
+    }

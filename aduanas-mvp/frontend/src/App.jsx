@@ -9,6 +9,7 @@ import RegistrarCruce from './pages/pdi/RegistrarCruce';
 import VerificarViajero from './pages/pdi/VerificarViajero';
 
 import RegistrarDeclaracion from './pages/sag/RegistrarDeclaracion';
+import ActualizarDeclaracion from './pages/sag/ActualizarDeclaracion';
 import RegistrarSalidaTemporal from './pages/vehiculos/RegistrarSalidaTemporal';
 import VerificarVehiculo from './pages/vehiculos/VerificarVehiculo';
 
@@ -40,6 +41,9 @@ function App() {
             
             <Route path="sag/declaracion" element={
               <ProtectedRoute allowedRoles={['FUNCIONARIO_SAG']}><RegistrarDeclaracion /></ProtectedRoute>
+            } />
+            <Route path="sag/actualizar" element={
+              <ProtectedRoute allowedRoles={['FUNCIONARIO_SAG']}><ActualizarDeclaracion /></ProtectedRoute>
             } />
             
             <Route path="vehiculos/salida" element={

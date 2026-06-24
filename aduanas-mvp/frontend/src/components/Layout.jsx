@@ -13,7 +13,7 @@ export default function Layout() {
         <Outlet />
       </main>
       <footer className="fixed bottom-2 right-4 text-xs text-gray-400">
-        v0.1.0-proto · 2025-06-23
+        v0.2.0-proto · 2026-06-24
       </footer>
     </div>
   );

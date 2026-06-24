@@ -26,6 +26,7 @@ export default function Navbar() {
           <>
             <div className="text-xs uppercase text-gray-300 font-semibold mt-4 mb-2">SAG Fitosanitario</div>
             <Link to="/sag/declaracion" className="hover:bg-aduana-light p-2 rounded">Nueva Declaración</Link>
+            <Link to="/sag/actualizar" className="hover:bg-aduana-light p-2 rounded">Actualizar Declaración</Link>
           </>
         )}
         
