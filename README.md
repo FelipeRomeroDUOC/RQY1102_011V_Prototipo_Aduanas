@@ -22,7 +22,9 @@ Existen dos maneras de levantar el proyecto: mediante Docker (recomendado para e
 Requiere tener **Docker Desktop** instalado y ejecutándose.
 
 1. Abre una terminal en la raíz del proyecto.
-2. Ejecuta el siguiente comando para construir y levantar ambos contenedores simultáneamente:
+2. Ejecuta el comando para construir y levantar ambos contenedores simultáneamente.
+
+   **En Windows (PowerShell / CMD) y Linux / macOS:**
    ```bash
    docker-compose up --build
    ```
