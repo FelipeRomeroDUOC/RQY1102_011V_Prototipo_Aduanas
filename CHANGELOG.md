@@ -2,6 +2,14 @@
 
 Este proyecto utiliza Versionado Semántico (SemVer) adaptado para prototipo bajo el formato `0.MINOR.PATCH-proto.YYYYMMDD`.
 
+## [0.1.2-proto.20250623] - 2025-06-23
+
+### Corregido
+- **Seguridad / Login**: Se implementó el control de intentos fallidos en el backend. Ahora las cuentas se bloquean por 15 minutos tras 5 intentos fallidos (CP_Auth_2).
+- **Frontend / UI**: Se corrigió el archivo `Login.jsx` que mostraba el mensaje genérico "Credenciales inválidas" independientemente del error devuelto por la API (p.ej., cuando la cuenta estaba bloqueada). Ahora extrae el mensaje de error del payload JSON.
+
+---
+
 ## [0.1.1-proto.20250623] - 2025-06-23
 
 ### Corregido
