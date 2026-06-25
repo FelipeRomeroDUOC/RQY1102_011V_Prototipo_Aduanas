@@ -1,5 +1,6 @@
 import { useState, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
+import { API_URL } from '../../config';
 
 export default function RegistrarSalidaTemporal() {
   const [patente, setPatente] = useState('');
@@ -19,7 +20,7 @@ export default function RegistrarSalidaTemporal() {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:8000/api/v1/vehiculos/salidas-temporales', {
+      const response = await fetch(`${API_URL}/api/v1/vehiculos/salidas-temporales`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -1,5 +1,6 @@
 import { useState, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
+import { API_URL } from '../../config';
 
 export default function RegistrarDeclaracion() {
   const [rutPasaporte, setRutPasaporte] = useState('');
@@ -23,7 +24,7 @@ export default function RegistrarDeclaracion() {
     try {
       const prodArray = productosDeclarados.split(',').map(p => p.trim()).filter(p => p);
       
-      const response = await fetch('http://localhost:8000/api/v1/sag/declaraciones', {
+      const response = await fetch(`${API_URL}/api/v1/sag/declaraciones`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -47,7 +48,7 @@ export default function RegistrarDeclaracion() {
       setSuccess(`Declaración #${data.id} registrada exitosamente para ${data.viajero}`);
       
       if (resultado !== 'PENDIENTE') {
-        const updateResponse = await fetch(`http://localhost:8000/api/v1/sag/declaraciones/${data.id}/resultado`, {
+        const updateResponse = await fetch(`${API_URL}/api/v1/sag/declaraciones/${data.id}/resultado`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',

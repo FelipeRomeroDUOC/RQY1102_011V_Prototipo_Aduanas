@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import { Navigate, useLocation } from 'react-router-dom';
+import { API_URL } from '../config';
 
 export default function Login() {
   const [rut, setRut] = useState('');
@@ -20,7 +21,7 @@ export default function Login() {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:8000/api/v1/auth/login', {
+      const response = await fetch(`${API_URL}/api/v1/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

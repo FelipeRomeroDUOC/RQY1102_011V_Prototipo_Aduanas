@@ -12,7 +12,7 @@ app = FastAPI(title="Sistema de Aduanas Chile API (MVP)", version="0.3.0-proto.2
 # RNF-04: CORS habilitado solo para Vite dev server
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

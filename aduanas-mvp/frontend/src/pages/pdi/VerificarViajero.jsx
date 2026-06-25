@@ -1,5 +1,6 @@
 import { useState, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
+import { API_URL } from '../../config';
 
 export default function VerificarViajero() {
   const [rutPasaporte, setRutPasaporte] = useState('');
@@ -17,7 +18,7 @@ export default function VerificarViajero() {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`http://localhost:8000/api/v1/pdi/viajeros/${rutPasaporte}`, {
+      const response = await fetch(`${API_URL}/api/v1/pdi/viajeros/${rutPasaporte}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       
@@ -30,7 +31,7 @@ export default function VerificarViajero() {
       setViajero(data);
       
       // Fetch historial
-      const histResponse = await fetch(`http://localhost:8000/api/v1/pdi/cruces/${rutPasaporte}/historial?limite=5`, {
+      const histResponse = await fetch(`${API_URL}/api/v1/pdi/cruces/${rutPasaporte}/historial?limite=5`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (histResponse.ok) {

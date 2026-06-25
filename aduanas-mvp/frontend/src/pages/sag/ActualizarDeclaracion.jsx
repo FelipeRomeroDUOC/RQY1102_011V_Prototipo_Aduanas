@@ -1,5 +1,6 @@
 import { useState, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
+import { API_URL } from '../../config';
 
 export default function ActualizarDeclaracion() {
   const { token } = useContext(AuthContext);
@@ -20,7 +21,7 @@ export default function ActualizarDeclaracion() {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`http://localhost:8000/api/v1/sag/declaraciones/${decId}`, {
+      const response = await fetch(`${API_URL}/api/v1/sag/declaraciones/${decId}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -49,7 +50,7 @@ export default function ActualizarDeclaracion() {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`http://localhost:8000/api/v1/sag/declaraciones/${declaracion.id}/resultado`, {
+      const response = await fetch(`${API_URL}/api/v1/sag/declaraciones/${declaracion.id}/resultado`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

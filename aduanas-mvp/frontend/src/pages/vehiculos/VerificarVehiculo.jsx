@@ -1,5 +1,6 @@
 import { useState, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
+import { API_URL } from '../../config';
 
 export default function VerificarVehiculo() {
   const [patente, setPatente] = useState('');
@@ -15,7 +16,7 @@ export default function VerificarVehiculo() {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`http://localhost:8000/api/v1/vehiculos/${patente.toUpperCase()}`, {
+      const response = await fetch(`${API_URL}/api/v1/vehiculos/${patente.toUpperCase()}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       
