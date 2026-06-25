@@ -12,7 +12,6 @@ services:
   - type: web
     name: aduanas-frontend
     env: static
-    plan: free
     buildCommand: "cd aduanas-mvp/frontend && npm install && npm run build"
     staticPublishPath: "./aduanas-mvp/frontend/dist"
     envVars:
