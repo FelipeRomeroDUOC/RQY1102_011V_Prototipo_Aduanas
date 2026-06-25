@@ -2,6 +2,7 @@ services:
   - type: web
     name: aduanas-backend
     env: python
+    plan: free
     buildCommand: "cd aduanas-mvp/backend && pip install -r requirements.txt"
     startCommand: "cd aduanas-mvp/backend && uvicorn main:app --host 0.0.0.0 --port $PORT"
     envVars:
@@ -11,6 +12,7 @@ services:
   - type: web
     name: aduanas-frontend
     env: static
+    plan: free
     buildCommand: "cd aduanas-mvp/frontend && npm install && npm run build"
     staticPublishPath: "./aduanas-mvp/frontend/dist"
     envVars:
